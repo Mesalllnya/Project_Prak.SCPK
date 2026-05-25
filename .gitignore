@@ -1,0 +1,11 @@
+# Abaikan Virtual Environment Python
+venv/
+.venv/
+env/
+
+# Abaikan folder cache Python
+__pycache__/
+*.pyc
+
+# Abaikan file konfigurasi VS Code lokal (opsional)
+.vscode/
