@@ -5,6 +5,28 @@ import matplotlib.pyplot as plt
 
 st.set_page_config(page_title="pemilihan laptop - WP", layout="wide")
 
+def konversi_storage(x):
+    text = str(x).strip().upper()
+    angka_text = "".join([char for char in text if char.isdigit()])
+    if not angka_text :
+        return 0
+    angka = float(angka_text)
+        
+    if "TB" in text:
+        return angka * 1024
+    return angka
+
+def konversi_ram(x):  
+    text = str(x).strip().upper()
+    angka_text = "".join([char for char in text if char.isdigit()])
+    if not angka_text:
+        return 0 
+    return float(angka_text)
+    
+def konversi_Price(x):
+    return float(x)
+
+
 
 #sidebar
 with st.sidebar:
@@ -14,7 +36,7 @@ with st.sidebar:
         "Data Raw",
         "Data CPU",
         "Data GPU",
-        "AHP"
+        "WP"
     ])
 
     st.markdown("___")
@@ -26,7 +48,7 @@ with st.sidebar:
     bobot_cpu = st.slider("Bobot CPU (Benefit)", 1, 5, 3)
     bobot_gpu = st.slider("Bobot GPU (Benefit)", 1, 5, 3)
     bobot_ram = st.slider("Bobot RAM (Benefit)", 1, 5, 3)
-    bobot_layar = st.slider("Bobot Layar (Benefit)", 1, 5, 3)
+    bobot_storage = st.slider("Bobot Storage (Benefit)", 1, 5, 3)
     bobot_harga = st.slider("Bobot Harga (Benefit)", 1, 5, 3)
 
 
@@ -102,19 +124,67 @@ if page == "Data GPU":
         st.dataframe(df_fixlaptopgpu)
         st.session_state["df_fixlaptopgpu"] = df_fixlaptopgpu
 
-if page == "AHP" :
+if page == "WP" :
     if "df_rawlaptop" in st.session_state and "df_fixlaptopcpu" in st.session_state and "df_fixlaptopgpu" in st.session_state:
         df_claptop = st.session_state["df_rawlaptop"]
         df_fixlaptopcpu = st.session_state["df_fixlaptopcpu"]
         df_fixlaptopgpu = st.session_state["df_fixlaptopgpu"]
 
 
-        st.dataframe(df_claptop)
-        st.dataframe(df_fixlaptopcpu)
-        st.dataframe(df_fixlaptopgpu)
-
+        #st.dataframe(df_claptop)
+        #$st.dataframe(df_fixlaptopcpu)
+        #st.dataframe(df_fixlaptopgpu)
+#datafinal
+        st.write("Data Final")
         df_step1 =  pd.merge(df_claptop,df_fixlaptopcpu, on="Model", how="left")
         df_stepfinal = pd.merge(df_step1,df_fixlaptopgpu, on="Model", how="left")
         df_final = df_stepfinal.dropna()
         df_datafinal = df_final.drop(columns=["Brand","CPU_x","GPU_x","CPU_Clean","GPU_Clean","CPU_y","GPU_y"])
         st.dataframe(df_datafinal)
+
+#konversi semua ke float
+        df_datafinal["Storage"] = df_datafinal["Storage"].apply(konversi_storage)
+        df_datafinal["RAM"] = df_datafinal["RAM"].apply(konversi_ram)
+        df_datafinal["Price_USD"] = df_datafinal["Price_USD"].apply(konversi_Price)
+        st.dataframe(df_datafinal)
+        #df_datafinal.info()
+
+#WP method
+        nama_kriteria = (["CPU","GPU","RAM","Storage","Harga"])
+        bobot_awal = np.array([bobot_cpu,bobot_gpu,bobot_ram,bobot_storage,bobot_harga])
+        k = np.array([1,1,1,1,-1])
+
+        total_bobot_awal = np.sum(bobot_awal)
+        norm_bobot = bobot_awal / total_bobot_awal
+
+
+        df_bobot = pd.DataFrame({
+            "Nama Kriteria": nama_kriteria,
+            "Bobot Kriteria":  bobot_awal,
+            "Bobot Ternormalisasi": np.round(norm_bobot,4)
+        })
+        df_bobot.index = df_bobot.index + 1
+        st.dataframe(df_bobot)
+
+        kolom_kriteria = ["multiScore","3DMark","RAM","Storage","Price_USD"]
+        matrix_x = df_datafinal[kolom_kriteria].to_numpy()
+        #RumusWP
+        
+        vektor_s = np.prod((matrix_x + 1e-9) ** (k * norm_bobot), axis=1)
+
+        vektor_v = vektor_s / np.sum(vektor_s)
+
+        df_wp_result = df_datafinal.copy()
+        df_wp_result["Vektor_S"] = vektor_s
+        df_wp_result["Vektor_V"] = vektor_v
+
+        df_ranking = df_wp_result.sort_values(by="Vektor_V", ascending=False).reset_index(drop=True)
+        df_ranking.index = df_ranking.index + 1
+
+        st.success("Hasil Rekomendasi Peringkat Laptop: ")
+
+        kolom_tampilan_akhir = ["Model", "RAM", "Storage", "Price_USD", "multiScore", "3DMark", "Vektor_V"]
+        st.dataframe(df_ranking[kolom_tampilan_akhir])
+
+
+

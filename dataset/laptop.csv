@@ -55,7 +55,7 @@ Laptop_ID,Brand,Model,CPU,RAM,Storage,GPU,Price_USD,Performance_Level
 54,Lenovo,Lenovo ThinkPad X1 Carbon G13,Intel Core Ultra 7 258V,16GB,512GB ,Intel Arc 140V,1843,Tier 2: High-End
 55,ASUS,ASUS TUF Gaming F15,Intel Core i7 13620H,16GB,1TB ,RTX 4060,1081,Tier 3: Mid-Range
 56,ASUS,ASUS Vivobook 16,AMD Ryzen 5 7520U,8GB,128GB ,Radeon 610M,233,Tier 4: Budget
-57,MSI,MSI Creator Z17 HX AI,Intel Core i9 14900HX,64GB,1TB ,RTX 4070,322,Tier 1: Enthusiast
+57,MSI,MSI Creator Z17 HX AI,Intel Core i9 14900HX,64GB,1TB ,RTX 4070,3223,Tier 1: Enthusiast
 58,Dell,Dell XPS 16,Intel Core Ultra 7 155H,32GB,1TB ,RTX 4070,2150,Tier 2: High-End
 59,Lenovo,Lenovo LOQ 15,Intel Core i5 13450HX,16GB,1TB ,RTX 3050,1128,Tier 3: Mid-Range
 60,Dell,Dell Inspiron 15 3530,Intel Core i5 1335U,16GB,64GB ,Intel Iris Xe,202,Tier 4: Budget
@@ -111,7 +111,7 @@ Laptop_ID,Brand,Model,CPU,RAM,Storage,GPU,Price_USD,Performance_Level
 110,Dell,Dell XPS 16,Intel Core Ultra 7 155H,32GB,1TB ,RTX 4060,1949,Tier 2: High-End
 111,Acer,Acer Nitro V 16,AMD Ryzen 7 8845HS,16GB,1TB ,RTX 4050,1147,Tier 3: Mid-Range
 112,ASUS,ASUS Vivobook 16,AMD Ryzen 5 7520U,8GB,128GB ,Radeon 610M,286,Tier 4: Budget
-113,MSI,MSI Creator Z17 HX AI,Intel Core i9 14900HX,64GB,4TB ,RTX 4070,236,Tier 1: Enthusiast
+113,MSI,MSI Creator Z17 HX AI,Intel Core i9 14900HX,64GB,4TB ,RTX 4070,2362,Tier 1: Enthusiast
 114,Samsung,Samsung Galaxy Book6 Ultra,Intel Core Ultra 9 285H,32GB,2TB ,RTX 4070,1337,Tier 2: High-End
 115,Dell,Dell Inspiron 16 Plus,Intel Core Ultra 7 155H,16GB,1TB ,RTX 4050,1191,Tier 3: Mid-Range
 116,Acer,Acer Chromebook Plus Spin 714,Intel Core i3 1315U,8GB,256GB ,Intel UHD,380,Tier 4: Budget
@@ -127,11 +127,11 @@ Laptop_ID,Brand,Model,CPU,RAM,Storage,GPU,Price_USD,Performance_Level
 126,HP,HP OmniBook Ultra 14,AMD Ryzen AI 9 HX 375,32GB,512GB ,Radeon 890M,1500,Tier 2: High-End
 127,Acer,Acer Swift Go 14 OLED,Intel Core Ultra 7 155H,16GB,1TB ,Intel Arc,1199,Tier 3: Mid-Range
 128,Lenovo,Lenovo IdeaPad Slim 3,AMD Ryzen 3 7320U,8GB,512GB ,Radeon 610M,613,Tier 4: Budget
-129,MSI,MSI Creator Z17 HX AI,Intel Core i9 14900HX,64GB,2TB ,RTX 4070,321,Tier 1: Enthusiast
+129,MSI,MSI Creator Z17 HX AI,Intel Core i9 14900HX,64GB,2TB ,RTX 4070,3211,Tier 1: Enthusiast
 130,Microsoft,"Microsoft Surface Laptop 7 15""",Snapdragon X Elite,16GB,1TB ,Adreno X1-85,1435,Tier 2: High-End
 131,ASUS,ASUS TUF Gaming F15,Intel Core i7 13620H,16GB,1TB ,RTX 4060,958,Tier 3: Mid-Range
 132,ASUS,ASUS Vivobook 16,AMD Ryzen 5 7520U,8GB,64GB ,Radeon 610M,258,Tier 4: Budget
-133,Razer,Razer Blade 16,Intel Core Ultra 9 185H,64GB,2TB ,RTX 4090,267,Tier 1: Enthusiast
+133,Razer,Razer Blade 16,Intel Core Ultra 9 185H,64GB,2TB ,RTX 4090,2677,Tier 1: Enthusiast
 134,Microsoft,"Microsoft Surface Laptop 7 15""",Snapdragon X Elite,32GB,512GB ,Adreno X1-85,1829,Tier 2: High-End
 135,HP,HP Envy x360 14,Intel Core Ultra 5 125U,16GB,1TB ,Intel Graphics,1075,Tier 3: Mid-Range
 136,Dell,Dell Inspiron 15 3530,Intel Core i5 1335U,8GB,512GB ,Intel Iris Xe,459,Tier 4: Budget
@@ -139,7 +139,7 @@ Laptop_ID,Brand,Model,CPU,RAM,Storage,GPU,Price_USD,Performance_Level
 138,Dell,Dell XPS 16,Intel Core Ultra 7 155H,32GB,512GB ,RTX 4060,1632,Tier 2: High-End
 139,Dell,Dell Inspiron 16 Plus,Intel Core Ultra 7 155H,16GB,512GB ,RTX 4050,948,Tier 3: Mid-Range
 140,ASUS,ASUS Vivobook 16,AMD Ryzen 5 7520U,16GB,256GB ,Radeon 610M,651,Tier 4: Budget
-141,MSI,MSI Creator Z17 HX AI,Intel Core i9 14900HX,64GB,1TB ,RTX 4070,233,Tier 1: Enthusiast
+141,MSI,MSI Creator Z17 HX AI,Intel Core i9 14900HX,64GB,1TB ,RTX 4070,2333,Tier 1: Enthusiast
 142,Apple,"Apple MacBook Pro 14""",Apple M4 (10-Core),16GB,1TB ,20-Core GPU,1790,Tier 2: High-End
 143,Lenovo,Lenovo LOQ 15,Intel Core i5 13450HX,16GB,512GB ,RTX 3050,818,Tier 3: Mid-Range
 144,Dell,Dell Inspiron 15 3530,Intel Core i5 1335U,8GB,512GB ,Intel Iris Xe,525,Tier 4: Budget
