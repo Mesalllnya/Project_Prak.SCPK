@@ -478,7 +478,65 @@ if page == "Visualisasi":
         ax2.spines['top'].set_visible(False)
         plt.tight_layout()
         st.pyplot(fig2, use_container_width=True)
+
+        # GRAFIK KOMPARASI TOP 3 LAPTOP
+        st.markdown("___")
+        st.subheader("🥉 Komparasi Kriteria Top 3 Laptop Terbaik")
+        st.write("Grafik batang berkelompok (Grouped Bar Chart) di bawah ini membandingkan kekuatan masing-masing kriteria dari 3 laptop dengan peringkat tertinggi. Nilai disajikan dalam persentase (0-100%).")
+
+        # Ambil 3 data teratas
+        df_top3 = df_ranking.head(3)
+        
+        # Label sumbu X untuk kriteria yang lebih ringkas
+        kriteria_label_top3 = ["CPU", "GPU", "RAM", "Storage", "Harga"]
+        
+        x = np.arange(len(kriteria_label_top3))
+        width = 0.25 # Lebar masing-masing bar
+        
+        fig3, ax3 = plt.subplots(figsize=(12, 6))
+        
+        # Palet warna untuk membedakan ke-3 laptop (Biru, Hijau, Oranye)
+        colors_top3 = ['#2E86C1', '#28B463', '#E67E22'] 
+
+        for i, (index, row) in enumerate(df_top3.iterrows()):
+            # Normalisasi data ke skala 0-100% menggunakan min-max sebelumnya
+            pct_cpu = ((row["multiScore"] - min_cpu) / (max_cpu - min_cpu + 1e-9)) * 100
+            pct_gpu = ((row["3DMark"] - min_gpu) / (max_gpu - min_gpu + 1e-9)) * 100
+            pct_ram = ((row["RAM"] - min_ram) / (max_ram - min_ram + 1e-9)) * 100
+            pct_st = ((row["Storage"] - min_st) / (max_st - min_st + 1e-9)) * 100
+            # Rumus harga dibalik karena sifatnya Cost
+            pct_pr = ((max_pr - row["Price_USD"]) / (max_pr - min_pr + 1e-9)) * 100
+            
+            scores = [pct_cpu, pct_gpu, pct_ram, pct_st, pct_pr]
+            
+            # Posisi x disesuaikan agar bar berjejer rapi
+            pos = x - width + (i * width)
+            
+            bars3 = ax3.bar(pos, scores, width, label=row['Model'], color=colors_top3[i], edgecolor='white', linewidth=1)
+            
+            # Menambahkan nilai persentase di atas setiap bar
+            for bar in bars3:
+                yval = bar.get_height()
+                ax3.text(bar.get_x() + bar.get_width()/2, yval + 1.5, f'{yval:.0f}%', 
+                         ha='center', va='bottom', fontsize=9, fontweight='bold', color='#4d4d4d')
+
+        # Formatting tampilan grafik
+        ax3.set_ylabel('Kualitas Relatif Kriteria (%)', fontsize=11)
+        ax3.set_xticks(x)
+        ax3.set_xticklabels(kriteria_label_top3, fontsize=12, fontweight='bold')
+        ax3.set_ylim(0, 115) # Memberi ruang agar teks di atas bar tidak terpotong
+        
+        # Memposisikan legenda di atas grafik
+        ax3.legend(loc='upper center', bbox_to_anchor=(0.5, 1.1), ncol=3, frameon=False, fontsize=11)
+        
+        # Membersihkan garis tepi dan menambahkan grid
+        ax3.spines['right'].set_visible(False)
+        ax3.spines['top'].set_visible(False)
+        ax3.spines['left'].set_visible(False)
+        ax3.grid(axis='y', linestyle='--', alpha=0.4)
+
+        plt.tight_layout()
+        st.pyplot(fig3, use_container_width=True)
             
     else:
         st.warning("Silakan buka halaman 'Data RAW', 'Data CPU', dan 'Data GPU' terlebih dahulu untuk memuat dataset ke memori aplikasi.")
-
